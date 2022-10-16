@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import AppContext from '../context/context';
 import { useNavigate } from 'react-router-dom';
 
 function Search() {
   const navigate = useNavigate();
   document.title = 'ICasei - Search';
-  function handleClick() {  
-    navigate('/search');
+  const { search, setSearchVideos } = useContext(AppContext);
+  function handleClick(e) {
+    navigate('/videos');
   }
+  useEffect(() => {
+  }, [search]);
+
   return (
     <>
       <form>
@@ -16,12 +21,13 @@ function Search() {
               type="search"
               name="search"
               placeholder="Pesquisar"
-              value=""
+              value={search}
+              onChange={({ target }) => setSearchVideos(target.value)}
             />
           </label>
           <button
             type="button"
-            onClick={ handleClick}
+            onClick={(e) => handleClick(e)}
           >
             Buscar
           </button>
@@ -32,6 +38,7 @@ function Search() {
 }
 
 export default Search;
+
 
 
 

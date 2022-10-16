@@ -5,7 +5,9 @@ import AppContext from './context';
 function AppProvider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isSearch] = useState(false);
+  const [isSearch, setSearch] = useState(false);
+  const [search, setSearchVideos] = useState('');
+  const [startVideo, seStartVideo] = useState([]);
 
   const contextValues = {
     email,
@@ -13,6 +15,10 @@ function AppProvider({ children }) {
     password,
     setPassword,
     isSearch,
+    setSearch,
+    search,
+    setSearchVideos,
+    startVideo, seStartVideo
   };
 
   return (

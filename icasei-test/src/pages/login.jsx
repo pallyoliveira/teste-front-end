@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppContext from '../context/context';
-
+import jpIMG from '../assents/icasei.png'
 
 function Login() {
   document.title = 'ICasei - Login';
@@ -10,41 +10,52 @@ function Login() {
   const MINLENGTH = 6;
   const validateEmail = /\S+@\S+\.\S+/.test(email);
 
-  function handleClick() {   
+  function handleClick() {
     navigate('/search');
   }
 
   return (
-    <form>
-      <fieldset>
-        <label htmlFor="email">
-          E-mail:
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={({ target }) => setEmail(target.value)}
-          />
-        </label>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </label>
-        <button
-          type="button"
-          data-testid="login-submit-btn"
-          disabled={!validateEmail || password.length <= MINLENGTH}
-          onClick={handleClick}
-        >
-          Login
-        </button>
-      </fieldset>
-    </form>
+    <div className="container">
+      <div className="container-login">
+        <div className="wrap-login">
+          <form className="login-form">
+            <span className="login-form-title">
+              <img src={jpIMG} alt="ICasei"></img>
+            </span>
+            <div className="wrap-input">
+              <input
+                type="email"
+                name="email"
+                className={email !== "" ? "has-val input" : "input"}
+                value={email}
+                onChange={({ target }) => setEmail(target.value)}
+              />
+              <span className="focus-input" data-placeholder="Email"></span>
+            </div>
+            <div className="wrap-input">
+              <input
+                className={password !== "" ? "has-val input" : "input"}
+                type="password"
+                name="password"
+                value={password}
+                onChange={({ target }) => setPassword(target.value)}
+              />
+              <span className="focus-input" data-placeholder="Password"></span>
+            </div>
+            <div className="container-login-form-btn">
+              <button
+                type="button"
+                className="login-form-btn"
+                disabled={!validateEmail || password.length <= MINLENGTH}
+                onClick={handleClick}
+              >
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
 export default Login;
