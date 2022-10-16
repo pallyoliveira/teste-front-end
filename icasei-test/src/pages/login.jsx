@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppContext from '../context/context';
-import jpIMG from '../assents/icasei.png'
+import jpIMG from '../assents/icasei.png';
+import "../style/login.css";
 
 function Login() {
   document.title = 'ICasei - Login';
