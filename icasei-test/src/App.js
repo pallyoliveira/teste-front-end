@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import AppProvider from './context/provider';
 import { Routes, Route } from 'react-router-dom'
 import Login from './pages/login';
@@ -15,7 +14,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Login />} />
         <Route exact path="/search" element={<Search />} />
-        <Route exact path="/videos" element={<Videos />} />
+        {/* <Route exact path="/videos" element={<Videos />} /> */}
         <Route exact path="/videos/:id" element={<Details/>} />
       </Routes>
     </AppProvider>

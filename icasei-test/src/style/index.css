@@ -1,0 +1,18 @@
+.animation {
+ width: 50vh;
+ height: 15vh;
+ position: relative;
+ animation: go-back  infinite alternate;
+ margin-top:-55vh;
+ z-index: 9999;
+ position: fixed;
+ 
+
+}
+
+/* @keyframes go-back {
+  from {
+    transform: translateX(100px);
+  }
+ 
+} */

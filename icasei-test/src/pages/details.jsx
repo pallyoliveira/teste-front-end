@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import AppContext from '../context/context';
 import ReactPlayer from 'react-player';
 import { API_KEY } from '../services/api';
+import Header from '../components/header';
 
 function Details() {
   document.title = 'Icasei - Details';

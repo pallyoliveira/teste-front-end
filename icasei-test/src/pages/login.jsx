@@ -13,6 +13,7 @@ function Login() {
 
   function handleClick() {
     navigate('/search');
+    localStorage.setItem("user", JSON.stringify({email: email, password: password}));
   }
 
   return (
