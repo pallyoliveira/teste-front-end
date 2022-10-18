@@ -1,5 +1,5 @@
 import youtubeSearch from 'youtube-api-v3-search';
-export const API_KEY = "AIzaSyCAobGCiK4m-E8GEoejuahoOTuxsN3DfnI";
+export const API_KEY = "AIzaSyC-Oy4fAQne3LQ6ttWeW2bDLo_ROQczvMA";
 
 export const requestVideos = async (search) => {
   try {

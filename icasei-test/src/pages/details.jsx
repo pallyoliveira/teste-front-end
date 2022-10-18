@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonExit: {
     width: "40px",
-    marginTop: "-30px"
+    marginTop: "-5px"
   },
   rodape: {
     textAlign: "center",
@@ -65,7 +65,7 @@ function Details() {
     setClassAnimation("animation");
     const videos = localStorage.getItem("videos");
     const play = JSON.parse(videos);
-    setVideoBoolean("0px")
+    setVideoBoolean("0px");
     setData(play);
   }
 
@@ -86,10 +86,11 @@ function Details() {
         color='textPrimary'
       >{snippet.title}</Typography>
       <Typography variant='body2' color='textSecondary' className={classes.rodape}>
-        <FavoriteIcon style={{ color: "red" }} fontSize="small" />  {statistics.likeCount}
+        &nbsp;<FavoriteIcon style={{ color: "red" }} fontSize="small" />
+        {statistics.likeCount}
         &nbsp; • &nbsp;
-        <MessageIcon style={{ color: "blue" }} fontSize="small" />      {`${statistics.commentCount
-          }`}
+        <MessageIcon style={{ color: "blue" }} fontSize="small" />
+        &nbsp;{`${statistics.commentCount}`}
       </Typography>
       <p className={classes.description}>{snippet.description}</p>
     </Box>

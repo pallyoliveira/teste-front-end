@@ -6,8 +6,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "10vh",
+    marginTop: "5vh",
     margin: "0",
+    background: theme.palette.primary.main,
   },
   movieRow: {
     marginBottom: '',

@@ -36,8 +36,9 @@ function Search() {
   const padding = videoBoolean ? "0px" : "320px 640px"
   const useStyles = makeStyles({
     root: {
-      background: theme.palette.primary.main,
-      height: '100%',
+     
+      // height: '150vh',
+      // width: "100%",
       display: "flex",
       padding: padding
     },
@@ -96,9 +97,6 @@ function Search() {
             </Button>
           </div>
           <Box className={classes.videos}>
-            {videoBoolean === false ? (
-              ""
-            ) : (<Videos data={data} />)}
             <Videos data={data} />
           </Box>
         </div>
