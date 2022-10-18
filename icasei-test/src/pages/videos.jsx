@@ -25,10 +25,7 @@ const useStyles = makeStyles((theme) => ({
       transform: "scale(1.2)",
       transition: "all 0.5s",
     },
-  },
-  results: {
-    textAlign: "center"
-  }
+  }, 
 }));
 
 function Videos({ data }) {

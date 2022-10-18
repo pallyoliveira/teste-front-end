@@ -36,9 +36,6 @@ function Search() {
   const padding = videoBoolean ? "0px" : "320px 640px"
   const useStyles = makeStyles({
     root: {
-     
-      // height: '150vh',
-      // width: "100%",
       display: "flex",
       padding: padding
     },
@@ -52,6 +49,7 @@ function Search() {
       marginTop: "-80px"
     },
   })
+  
   const classes = useStyles();
   async function fetchData() {
     const response = await requestVideos(search);
