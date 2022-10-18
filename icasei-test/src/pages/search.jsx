@@ -1,16 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import AppContext from '../context/context';
 import { useNavigate } from 'react-router-dom';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {
   createTheme, ThemeProvider, makeStyles, AppBar,
-  Button, Toolbar, IconButton,
+  Button, Toolbar, Box
 } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import Input from '../components/input';
 import "../style/index.css";
 import Videos from './videos';
-
+import { requestVideos } from '../services/api';
 
 const theme = createTheme({
   palette: {
@@ -23,57 +23,52 @@ const theme = createTheme({
   },
 });
 
-const useStyles = makeStyles({
-  root: {
-    background: theme.palette.primary.main,
-    height: "100vh",
-    padding: theme.spacing(50, 80),
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  toolBar: {
-    paddingLeft: theme.spacing(5),  
-  },
-  button: {
-    margin: theme.spacing(1),
-    color: "green",
-    marginLeft: "25vh",
-  },
-  videos: {
-    position: "absolute"
-  },
-  menuButton: {
-   
-  }
-})
-
 function Search() {
   const navigate = useNavigate();
   document.title = "ICasei - Search";
-  const { search } = useContext(AppContext);
+  const { search, setClassAnimation,
+    classAnimation, videoBoolean, setVideoBoolean,
+    data, setData } = useContext(AppContext);
   const storage = localStorage.getItem("user");
-  const [classAnimation, setClassAnimation] = useState("");
-  const [videosOk, setStartVideosOk]  = useState(false);
   const user = JSON.parse(storage);
 
-  function handleClick(e) {
-    setClassAnimation("animation");
-    // navigate("/videos");
-  }
-  function backLogin() {   
-    navigate("/");
-  }
 
-
+  const padding = videoBoolean ? "0px" : "320px 640px"
+  const useStyles = makeStyles({
+    root: {
+      background: theme.palette.primary.main,
+      height: '100%',
+      display: "flex",
+      padding: padding
+    },
+    grow: {
+      flexGrow: 1,
+    },
+    button: {
+      margin: theme.spacing(1),
+      color: "green",
+      marginLeft: "42vh",
+      marginTop: "-80px"
+    },
+  })
+  const classes = useStyles();
+  async function fetchData() {
+    const response = await requestVideos(search);
+    localStorage.setItem("videos", JSON.stringify(response));
+    setData(response);
+  }
   useEffect(() => {
   }, [search]);
 
-  const classes = useStyles();
+  function handleClick() {
+    setClassAnimation("animation");
+    setVideoBoolean(true);
+    fetchData()
+  }
 
-
-
-
+  function backLogin() {
+    navigate("/");
+  }
 
   return (
     <>
@@ -85,30 +80,29 @@ function Search() {
                 {user.email}
               </Button>
               <div className={classes.grow} />
-              <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                <Button startIcon={<ExitToAppIcon />} title="Voltar para a página de Login" onClick={backLogin}></Button>
-              </IconButton>
+              <Button startIcon={<ExitToAppIcon />} title="Voltar para a página de Login" onClick={backLogin}></Button>
             </Toolbar>
-          </AppBar>   
+          </AppBar>
           <div className={classAnimation} >
-          <Input/>
-          <Button
-          variant="contained"
-          disabled={!search}
-          onClick={(e) => handleClick(e)}
-          className={classes.button}
-          endIcon={<SendIcon></SendIcon>}
-        >
-          Buscar
-        </Button>
-        
-
-        </div>
-
-     
+            <Input />
+            <Button
+              variant="contained"
+              disabled={!search}
+              onClick={handleClick}
+              className={classes.button}
+              endIcon={<SendIcon></SendIcon>}
+            >
+              Buscar
+            </Button>
+          </div>
+          <Box className={classes.videos}>
+            {videoBoolean === false ? (
+              ""
+            ) : (<Videos data={data} />)}
+            <Videos data={data} />
+          </Box>
         </div>
       </ThemeProvider>
-
     </>
   );
 }

@@ -15,7 +15,7 @@ function App() {
         <Route exact path="/" element={<Login />} />
         <Route exact path="/search" element={<Search />} />
         {/* <Route exact path="/videos" element={<Videos />} /> */}
-        <Route exact path="/videos/:id" element={<Details/>} />
+        <Route exact path="/search/:id" element={<Details/>} />
       </Routes>
     </AppProvider>
   );

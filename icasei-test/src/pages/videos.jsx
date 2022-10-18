@@ -1,43 +1,76 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AppContext from '../context/context';
-import { requestVideos } from '../services/api';
+import { Divider, Box, Typography, Grid } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 
-function Videos() {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: "10vh",
+    margin: "0",
+  },
+  movieRow: {
+    marginBottom: '',
+    margin: "50px 30px 40px 40px",
+    display: "inline-block",
+    maxWidth: "300px"
+  },
+  titleImg: {
+    color: "white"
+  },
+  image: {
+    "&:hover": {
+      cursor: "pointer",
+      transform: "scale(1.2)",
+      transition: "all 0.5s",
+    },
+  },
+  results: {
+    textAlign: "center"
+  }
+}));
+
+function Videos({ data }) {
   document.title = 'Icasei - Videos';
   const navigate = useNavigate();
-  const { search, seStartVideo } = useContext(AppContext);
-  const [data, setData] = useState([]);
-
+  const { setStartVideo } = useContext(AppContext);
+  const [videos, setVideos] = useState([]);
+  const classes = useStyles();
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await requestVideos(search);
-      console.log(response);
-      setData(response);
+    if (data !== []) {
+      setVideos(data);
     }
-    fetchData();
-  }, [search]);
+  }, [data]);
 
   function startVideo(video) {
-    navigate(`/videos/${video.id.videoId}`);
-    seStartVideo(video);
-    console.log(video, 'e')
+    navigate(`/search/${video.id.videoId}`);
+    setStartVideo(video);
   }
+
   return (
-    <>
-      {data.map((video, index) => {
+    <Box className={classes.root}>
+      {videos.map((video, index) => {
         const { title, thumbnails, description, } = video.snippet;
         return (
-          <div key={index}>
-            <span>{title}</span>
-            <br>
-            </br>
-            <img onClick={() => startVideo(video)} src={thumbnails.medium.url} alt="" />
+          <Grid key={index} className={classes.movieRow}>
+            <Typography
+              style={{ fontWeight: 600 }}
+              gutterBottom
+              className={classes.titleImg}
+            >
+              {title}
+            </Typography>
+            <img
+              className={classes.image}
+              alt={title}
+              onClick={() => startVideo(video)} src={thumbnails.medium.url} title="Clique para reproduzir" />
             <small>{description}</small>
-          </div>);
+            <Divider />
+          </Grid>
+        );
       })}
-    </>
+    </Box>
   );
 }
 

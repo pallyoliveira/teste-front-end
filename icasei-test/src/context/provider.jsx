@@ -7,7 +7,10 @@ function AppProvider({ children }) {
   const [password, setPassword] = useState('');
   const [isSearch, setSearch] = useState(false);
   const [search, setSearchVideos] = useState('');
-  const [startVideo, seStartVideo] = useState([]);
+  const [startVideo, setStartVideo] = useState([]);
+  const [classAnimation, setClassAnimation] = useState("");
+  const [data, setData] = useState([]);
+  const [videoBoolean, setVideoBoolean] = useState(false);
 
   const contextValues = {
     email,
@@ -18,7 +21,11 @@ function AppProvider({ children }) {
     setSearch,
     search,
     setSearchVideos,
-    startVideo, seStartVideo
+    startVideo, setStartVideo,
+    setClassAnimation,  
+    classAnimation,
+    data, setData,
+    videoBoolean, setVideoBoolean
   };
 
   return (

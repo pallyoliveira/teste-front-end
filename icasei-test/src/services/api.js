@@ -1,11 +1,11 @@
 import youtubeSearch from 'youtube-api-v3-search';
-export const API_KEY = "AIzaSyDhD6mq4ltVO4AaGsi4wPrWSulgmL9cuFM";
+export const API_KEY = "AIzaSyCAobGCiK4m-E8GEoejuahoOTuxsN3DfnI";
 
 export const requestVideos = async (search) => {
   try {
     var response = youtubeSearch(API_KEY, { part: 'snippet', q: search, maxResults: 30 })
       .then((data) => (data.items));
-    await fetch('/videos/https://www.googleapis.com/youtube/v3', {
+    await fetch('https://www.googleapis.com/youtube/v3', {
       method: 'GET',
       mode: 'no-cors',
       body: JSON.stringify(),
@@ -18,3 +18,23 @@ export const requestVideos = async (search) => {
     return error;
   }
 };
+
+export const requestVideoByID = async (startVideo) => {
+  try {
+   const response =  await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${startVideo.id.videoId}&part=snippet,statistics&key=${API_KEY}`, {
+      method: 'GET',
+      mode: 'no-cors',
+   
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log(response.json(), 'tesponsesk')
+    return response.json();
+    
+  } catch (error) {
+    return error;
+  }
+};
+
+

@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
+
   },
   input: {
     margin: theme.spacing(0.5),
@@ -20,6 +21,7 @@ const theme = createTheme({
     primary: green,
   },
 });
+
 
 function Input() {
   document.title = "ICasei - Search";
@@ -42,8 +44,7 @@ function Input() {
         id="mui-theme-provider-standard-input"
         onKeyDown={(e) => doNothing(e)}
         value={search}
-        onChange={({ target }) => setSearchVideos(target.value)}
-        defaultValue="Pesquisar"
+        onChange={({ target }) => setSearchVideos(target.value)}      
         required
         variant="outlined"
       />
