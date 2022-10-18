@@ -28,10 +28,8 @@ export const requestVideoByID = async (startVideo) => {
       headers: {
         'Content-Type': 'application/json',
       },
-    });
-    console.log(response.json(), 'tesponsesk')
-    return response.json();
-    
+    });   
+    return response.json();    
   } catch (error) {
     return error;
   }
