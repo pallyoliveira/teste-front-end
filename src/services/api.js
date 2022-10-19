@@ -1,5 +1,5 @@
 import youtubeSearch from 'youtube-api-v3-search';
-export const API_KEY = "AIzaSyC-Oy4fAQne3LQ6ttWeW2bDLo_ROQczvMA";
+export const API_KEY = "AIzaSyDywgReYAbVH6PwKrWKaHGmOCiKobBCyOs";
 
 export const requestVideos = async (search) => {
   try {
@@ -21,15 +21,15 @@ export const requestVideos = async (search) => {
 
 export const requestVideoByID = async (startVideo) => {
   try {
-   const response =  await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${startVideo.id.videoId}&part=snippet,statistics&key=${API_KEY}`, {
+    const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${startVideo.id.videoId}&part=snippet,statistics&key=${API_KEY}`, {
       method: 'GET',
       mode: 'no-cors',
-   
+
       headers: {
         'Content-Type': 'application/json',
       },
-    });   
-    return response.json();    
+    });
+    return response.json();
   } catch (error) {
     return error;
   }
